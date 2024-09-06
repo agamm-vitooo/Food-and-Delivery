@@ -1,90 +1,101 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import '../../assets/style/customSwiperStyles.css'; // Add custom styles for the swiper
 
-// Import gambar-gambar makanan
+// Import image assets
 import pizzaImg from '../../assets/images/pizza.svg';
 import pancakeImg from '../../assets/images/pancake.svg';
 import cakeImg from '../../assets/images/cake.svg';
 import meatballImg from '../../assets/images/meatball.svg';
 import burgerImg from '../../assets/images/burger.svg';
 
-// Array berisi data slide
+// Slide data array
 const foodItems = [
-  {
-    id: 1,
-    name: 'Special Pizza',
-    rating: 4.5,
-    price: '$20',
-    image: pizzaImg,
-  },
-  {
-    id: 2,
-    name: 'Pancake',
-    rating: 4.5,
-    price: '$10',
-    image: pancakeImg,
-  },
-  {
-    id: 3,
-    name: 'Straw Cake',
-    rating: 4.5,
-    price: '$8',
-    image: cakeImg,
-  },
-  {
-    id: 4,
-    name: 'Meatball',
-    rating: 4.5,
-    price: '$15',
-    image: meatballImg,
-  },
-  {
-    id: 5,
-    name: 'Burger',
-    rating: 4.5,
-    price: '$12',
-    image: burgerImg,
-  },
+  { id: 1, name: 'Special Pizza', rating: 4.5, price: '$20', image: pizzaImg },
+  { id: 2, name: 'Pancake', rating: 4.5, price: '$10', image: pancakeImg },
+  { id: 3, name: 'Straw Cake', rating: 4.5, price: '$8', image: cakeImg },
+  { id: 4, name: 'Meatball', rating: 4.5, price: '$15', image: meatballImg },
+  { id: 5, name: 'Burger', rating: 4.5, price: '$12', image: burgerImg },
 ];
 
 const PopularDelivery = () => {
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
   return (
     <section className="bg-white py-12 min-h-screen flex items-center">
       <div className="container mx-auto text-center">
         <h3 className="text-orange-500 text-sm mb-2">- Popular Delivery -</h3>
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Trending food</h2>
 
-        {/* Tambahkan class flex, justify-center, items-center */}
+        {/* Centered Carousel */}
         <div className="flex justify-center items-center">
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={30}
-            slidesPerView={3}
-            navigation
-            pagination={{ clickable: true }}
-            centeredSlides={true}
-            loop={true}
-            className="pb-12 max-w-4xl" // Batasi lebar container Swiper
-          >
-            {foodItems.map((item) => (
-              <SwiperSlide key={item.id}>
-                <div className="relative">
-                  <img src={item.image} alt={item.name} className="w-full h-64 object-cover rounded-lg" />
-                  <div className="absolute bottom-4 left-4 text-left">
-                    <h3 className="text-white font-bold text-lg">{item.name}</h3>
-                    <p className="text-yellow-400">{item.rating} ★★★★★</p>
-                  </div>
-                  <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-lg text-gray-800 font-bold">
-                    {item.price}
-                  </div>
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={30}
+          slidesPerView={3}
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          pagination={{ clickable: true }}
+          centeredSlides={true}
+          loop={true}
+          onSwiper={(swiper) => {
+            setTimeout(() => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            });
+          }}
+          breakpoints={{
+            0: { slidesPerView: 1 },       // Show 1 slide for very small screens
+            640: { slidesPerView: 1 },     // Show 1 slide for mobile screens
+            768: { slidesPerView: 2 },     // Show 2 slides for tablet screens
+            1024: { slidesPerView: 3 },    // Show 3 slides for larger screens
+          }}
+          className="pb-20 max-w-6xl w-full custom-swiper"
+        >
+          {foodItems.map((item) => (
+            <SwiperSlide key={item.id} className="custom-slide p-16 md:p-2">
+              <div className="relative">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-64 object-cover rounded-lg"
+                />
+                <div className="absolute bottom-4 left-4 text-left">
+                  <h3 className="text-white font-bold text-lg">{item.name}</h3>
+                  <p className="text-yellow-400">{item.rating} ★★★★★</p>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-lg text-gray-800 font-bold">
+                  {item.price}
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        </div>
+
+        {/* Custom navigation buttons */}
+        <div className="flex justify-center mt-4">
+          <button
+            ref={prevRef}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 mx-2"
+          >
+            <span className="text-lg">←</span>
+          </button>
+          <button
+            ref={nextRef}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 mx-2"
+          >
+            <span className="text-lg">→</span>
+          </button>
         </div>
       </div>
     </section>

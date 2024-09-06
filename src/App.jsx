@@ -1,6 +1,6 @@
 import './App.css';
 import { Navbar } from './component/layout/Navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Hero from './component/sections/Hero';
 import SupportBy from './component/sections/SupportBy';
 import OurServices from './component/sections/OurServices';
@@ -19,31 +19,34 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        {/* Routing */}
         <Routes>
           {/* Halaman beranda */}
-          <Route path="/" element={
-            <>
-              <Hero />
-              <SupportBy />
-              <div className='bg'>
+          <Route 
+            path="/" 
+            element={
+              <>
+                <Hero />
+                <SupportBy />
                 <OurServices />
                 <PopularDelivery />
                 <Comment />
                 <ContactEmail />
                 <Footer />
-              </div>
-            </>
-          } />
-          
+              </>
+            } 
+          />
+
           {/* Halaman menu */}
           <Route path="/menu" element={<Menu />} />
-          
+
           {/* Halaman services */}
           <Route path="/services" element={<Services />} />
-          
+
           {/* Halaman contact */}
           <Route path="/contact" element={<Contact />} />
+
+          {/* Redirect any invalid route to homepage */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </Router>
