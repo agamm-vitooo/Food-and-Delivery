@@ -4,14 +4,13 @@ import avatar1 from '../../assets/images/avatar1.svg';
 import avatar2 from '../../assets/images/avatar2.svg';
 import avatar3 from '../../assets/images/avatar3.svg';
 
-
 const Hero = () => {
   return (
     <section className="bg-white py-12">
-      <div className="container mx-auto flex flex-col md:flex-row items-center">
+      <div className="container mx-auto px-7 md:px-14 flex flex-wrap justify-between items-center">
         {/* Left section (text and buttons) */}
         <div className="w-full md:w-1/2 text-left md:pr-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="md:text-5xl text-4xl font-bold text-gray-900 mb-6">
             Don’t wanna<br />
             Make you have<br />
             A bad day
@@ -43,14 +42,8 @@ const Hero = () => {
         {/* Right section (image and details) */}
         <div className="w-full md:w-1/2 mt-10 md:mt-0 relative">
           <div className="relative z-10">
-            <img src={womanImage} alt="Woman Thinking" className="w-full max-w-[700px] mx-auto" />
-          </div>
-
-          {/* John Smith Info */}
-          <div className="absolute top-10 left-10 bg-white p-2 rounded-lg shadow-lg flex items-center space-x-2">
-            <img src={avatar1} alt="John Smith" className="w-8 h-8 rounded-full" />
-            <p className="text-gray-800 font-bold">John Smith</p>
-          </div>
+            <img src={womanImage} alt="Woman Thinking" className="w-full max-w-[500px] mx-auto" />
+          </div> 
 
           {/* Icon example */}
           <div className="absolute top-20 right-10 bg-white p-4 rounded-full shadow-lg">

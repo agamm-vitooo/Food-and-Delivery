@@ -42,7 +42,7 @@ const testimonials = [
 const Comment = () => {
   return (
     <section className="py-16 bg-[#fdf8f5]">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-7 md:px-14">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={50}

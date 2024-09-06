@@ -10,7 +10,7 @@ export const SupportBy = () => {
     <section className="bg-white py-12">
       <div className="container mx-auto text-center">
         <h3 className="text-gray-500 text-sm mb-8">Support by :</h3>
-        <div className="flex flex-wrap justify-center items-center space-x-4 md:space-x-36">
+        <div className="container p-4 md:px-14 px-8 flex flex-wrap justify-center items-center space-x-4 md:space-x-36 gap-4">
           {/* Logo 1 */}
           <img src={gopayLogo} alt="Gopay" className="h-10 my-2" />
           {/* Logo 2 */}

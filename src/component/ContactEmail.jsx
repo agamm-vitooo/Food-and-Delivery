@@ -4,7 +4,7 @@ import contactEmailImg from '../../src/assets/images/contact-email.svg'; // Upda
 const ContactEmail = () => {
   return (
     <section className="bg-orange-400 py-16 flex justify-center items-center min-h-screen">
-      <div className="container mx-auto flex flex-col lg:flex-row items-center gap-8 px-4">
+      <div className="container mx-auto px-7 md:px-14 flex flex-col lg:flex-row items-center gap-8 px-4">
         
         {/* Image Section */}
         <div className="w-full lg:w-1/2 flex justify-center">
