@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './component/layout/Navbar';
 import Hero from './component/sections/Hero';
@@ -17,40 +17,17 @@ import Login from './component/auth/LoginForm';
 import RegisterForm from './component/auth/RegisterForm';
 
 function App() {
-  // Data produk disimpan di App.js
-  const products = [
-    {
-      id: 1,
-      name: 'Pizza Margherita',
-      description: 'Pizza dengan saus tomat segar dan keju mozzarella.',
-      price: 50000,
-      image: 'https://example.com/pizza-margherita.jpg',
-    },
-    {
-      id: 2,
-      name: 'Burger Sapi',
-      description: 'Burger sapi dengan keju, selada, dan saus BBQ.',
-      price: 45000,
-      image: 'https://example.com/burger-sapi.jpg',
-    },
-    {
-      id: 3,
-      name: 'Spaghetti Carbonara',
-      description: 'Spaghetti dengan saus krim dan bacon yang renyah.',
-      price: 55000,
-      image: 'https://example.com/spaghetti-carbonara.jpg',
-    },
-    {
-      id: 4,
-      name: 'Nasi Goreng Spesial',
-      description: 'Nasi goreng dengan telur, ayam, dan udang.',
-      price: 30000,
-      image: 'https://example.com/nasi-goreng.jpg',
-    },
-  ];
-
-  // State untuk mengelola item di keranjang
+  // State untuk menyimpan data produk yang diambil dari file JSON
+  const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+
+  // Fungsi untuk mengambil data produk dari file products.json
+  useEffect(() => {
+    fetch('/products.json')
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error fetching the products:', error));
+  }, []);
 
   // Fungsi untuk menambahkan item ke keranjang
   const addToCart = (item) => {

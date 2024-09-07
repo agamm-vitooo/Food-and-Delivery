@@ -1,0 +1,141 @@
+[{
+        "id": 1,
+        "name": "Nasi Liwet Ibu Siti",
+        "description": "Nasi liwet khas rumahan dengan lauk pauk sederhana seperti tempe, tahu, dan sambal terasi.",
+        "price": 20000,
+        "image": "https://example.com/nasi-liwet-ibu-siti.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Sate Maranggi Mang Udin",
+        "description": "Sate daging sapi empuk dengan bumbu khas Maranggi, disajikan dengan nasi hangat.",
+        "price": 30000,
+        "image": "https://example.com/sate-maranggi-mang-udin.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Tahu Sumedang Pak Joko",
+        "description": "Tahu goreng yang garing di luar dan lembut di dalam, cocok sebagai camilan atau lauk.",
+        "price": 15000,
+        "image": "https://example.com/tahu-sumedang-pak-joko.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Ayam Geprek Bu Nani",
+        "description": "Ayam goreng tepung yang digeprek dengan sambal bawang pedas, disajikan dengan nasi putih.",
+        "price": 25000,
+        "image": "https://example.com/ayam-geprek-bu-nani.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Mie Ayam Bang Ari",
+        "description": "Mie ayam kenyal dengan topping ayam cincang manis dan pangsit, khas kaki lima.",
+        "price": 18000,
+        "image": "https://example.com/mie-ayam-bang-ari.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Gado-Gado Mak Eha",
+        "description": "Gado-gado dengan saus kacang gurih dan sayuran segar, disajikan dengan lontong.",
+        "price": 15000,
+        "image": "https://example.com/gado-gado-mak-eha.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Es Dawet Pak Slamet",
+        "description": "Es dawet cendol khas Jawa Tengah dengan santan segar dan gula merah manis.",
+        "price": 10000,
+        "image": "https://example.com/es-dawet-pak-slamet.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Pempek Ikan Palembang Bu Leli",
+        "description": "Pempek khas Palembang dengan ikan segar dan kuah cuko pedas manis.",
+        "price": 20000,
+        "image": "https://example.com/pempek-bu-leli.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Nasi Goreng Kampung Mas Anang",
+        "description": "Nasi goreng kampung dengan bumbu khas, telur ceplok, dan kerupuk.",
+        "price": 25000,
+        "image": "https://example.com/nasi-goreng-mas-anang.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Soto Lamongan Bu Dewi",
+        "description": "Soto ayam khas Lamongan dengan kuah kuning dan suwiran ayam.",
+        "price": 20000,
+        "image": "https://example.com/soto-lamongan-bu-dewi.jpg"
+    },
+    {
+        "id": 11,
+        "name": "Kopi Tubruk Pak Rudi",
+        "description": "Kopi tubruk tradisional dengan aroma khas dan rasa yang kuat, cocok untuk penggemar kopi.",
+        "price": 8000,
+        "image": "https://example.com/kopi-tubruk-pak-rudi.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Bubur Kacang Hijau Mak Minah",
+        "description": "Bubur kacang hijau dengan santan kental dan gula merah, cocok untuk sarapan atau camilan sore.",
+        "price": 12000,
+        "image": "https://example.com/bubur-kacang-hijau-mak-minah.jpg"
+    },
+    {
+        "id": 13,
+        "name": "Nasi Kuning Mak Nur",
+        "description": "Nasi kuning khas UMKM dengan ayam goreng, sambal, dan orek tempe.",
+        "price": 25000,
+        "image": "https://example.com/nasi-kuning-mak-nur.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Pisang Goreng Madu Bu Ratna",
+        "description": "Pisang goreng yang manis dengan madu, cocok untuk teman minum teh.",
+        "price": 10000,
+        "image": "https://example.com/pisang-goreng-madu-bu-ratna.jpg"
+    },
+    {
+        "id": 15,
+        "name": "Kue Lapis Legit Ibu Ani",
+        "description": "Kue lapis legit tradisional dengan rasa manis dan tekstur lembut, cocok untuk acara spesial.",
+        "price": 35000,
+        "image": "https://example.com/kue-lapis-legit-ibu-ani.jpg"
+    },
+    {
+        "id": 16,
+        "name": "Bakso Pak Agus",
+        "description": "Bakso sapi kenyal dengan kuah kaldu yang gurih, disajikan dengan mie dan sayuran.",
+        "price": 20000,
+        "image": "https://example.com/bakso-pak-agus.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Lontong Cap Go Meh Bu Rina",
+        "description": "Lontong dengan opor ayam dan sayur lodeh, disajikan dengan sambal goreng hati.",
+        "price": 30000,
+        "image": "https://example.com/lontong-cap-go-meh-bu-rina.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Sate Kambing Muda Pak Madi",
+        "description": "Sate kambing empuk dengan bumbu kecap manis pedas, khas dari kaki lima.",
+        "price": 35000,
+        "image": "https://example.com/sate-kambing-pak-madi.jpg"
+    },
+    {
+        "id": 19,
+        "name": "Es Cendol Dawet Bu Siti",
+        "description": "Minuman es cendol segar dengan gula merah dan santan yang nikmat.",
+        "price": 12000,
+        "image": "https://example.com/es-cendol-bu-siti.jpg"
+    },
+    {
+        "id": 20,
+        "name": "Rujak Buah Segar Pak Narto",
+        "description": "Rujak buah segar dengan bumbu kacang pedas manis, pilihan buah lokal segar.",
+        "price": 15000,
+        "image": "https://example.com/rujak-pak-narto.jpg"
+    }
+]

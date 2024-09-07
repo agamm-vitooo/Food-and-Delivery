@@ -20,12 +20,12 @@ const Hero = () => {
           transition={{ duration: 1.4, ease: 'easeOut' }} // Durasi animasi
         >
           <h1 className="md:text-5xl text-4xl font-bold text-gray-900 mb-6">
-            Don’t wanna<br />
-            Make you have<br />
-            A bad day
+            Rasakan Kenikmatan<br />
+            Setiap Gigitan<br />
+            Tanpa Penantian Lama
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            Our job is delivering a delicious food with fast, free delivery and easy.
+            Kami hadir untuk menyajikan makanan lezat dengan pengiriman cepat, gratis, dan mudah.
           </p>
           <div className="flex space-x-4 mb-8">
             <motion.button
@@ -34,7 +34,7 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/menu')} // Route ke halaman Menu
             >
-              Order Now
+              Pesan Sekarang
             </motion.button>
             <motion.button
               className="border border-orange-500 text-orange-500 px-6 py-3 rounded-full hover:bg-orange-100"
@@ -42,18 +42,18 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/services')} // Route ke halaman Our Services
             >
-              Explore
+              Jelajahi
             </motion.button>
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex -space-x-2">
-              <img src={avatar1} alt="Customer 1" className="w-10 h-10 rounded-full border-2 border-white" />
-              <img src={avatar2} alt="Customer 2" className="w-10 h-10 rounded-full border-2 border-white" />
-              <img src={avatar3} alt="Customer 3" className="w-10 h-10 rounded-full border-2 border-white" />
+              <img src={avatar1} alt="Pelanggan 1" className="w-10 h-10 rounded-full border-2 border-white" />
+              <img src={avatar2} alt="Pelanggan 2" className="w-10 h-10 rounded-full border-2 border-white" />
+              <img src={avatar3} alt="Pelanggan 3" className="w-10 h-10 rounded-full border-2 border-white" />
             </div>
             <div>
-              <p className="text-gray-700 font-bold">Customer Review</p>
-              <p className="text-sm text-gray-500">★ 4.8 (8k reviews)</p>
+              <p className="text-gray-700 font-bold">Ulasan Pelanggan</p>
+              <p className="text-sm text-gray-500">★ 4.8 (8k ulasan)</p>
             </div>
           </div>
         </motion.div>
@@ -66,7 +66,7 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }} // Durasi dan delay animasi
         >
           <div className="relative z-10">
-            <img src={womanImage} alt="Woman Thinking" className="w-full max-w-[500px] mx-auto" />
+            <img src={womanImage} alt="Wanita Berpikir" className="w-full max-w-[500px] mx-auto" />
           </div> 
 
           {/* Icon example */}
