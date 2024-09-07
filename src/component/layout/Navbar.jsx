@@ -33,12 +33,14 @@ export const Navbar = ({ cartCount }) => {
           F&D
         </div>
 
-        {/* Cart Icon untuk tampilan mobile & desktop */}
+        {/* Cart Icon untuk tampilan mobile */}
         <div className="relative flex items-center md:hidden ml-auto">
           <NavLink to="/cart" className="relative text-gray-600 hover:text-orange-500">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2 5h14M9 21h6" />
-            </svg>
+            <img
+              src="https://img.icons8.com/fluency-systems-regular/96/shopping-cart--v1.png"
+              alt="shopping cart"
+              className="h-6 w-6"
+            />
             {cartCount > 0 && (
               <span className="absolute top-0 right-0 bg-orange-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
                 {cartCount}
@@ -122,9 +124,11 @@ export const Navbar = ({ cartCount }) => {
       <div className="hidden md:flex items-center space-x-4">
         <div className="relative">
           <NavLink to="/cart" className="relative text-gray-600 hover:text-orange-500">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2 5h14M9 21h6" />
-            </svg>
+            <img
+              src="https://img.icons8.com/fluency-systems-regular/96/shopping-cart--v1.png"
+              alt="shopping cart"
+              className="h-6 w-6"
+            />
             {cartCount > 0 && (
               <span className="absolute top-0 right-0 bg-orange-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
                 {cartCount}
