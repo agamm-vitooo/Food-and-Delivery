@@ -1,6 +1,7 @@
+import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Navbar } from './component/layout/Navbar';
+import Navbar from './component/layout/Navbar';
 import Hero from './component/sections/Hero';
 import SupportBy from './component/sections/SupportBy';
 import OurServices from './component/sections/OurServices';
@@ -12,91 +13,123 @@ import Menu from './pages/Menu';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import Cart from './pages/Cart';
-import ProductDetail from './pages/ProductDetail'; // Import ProductDetail
-import Login from './component/auth/LoginForm';
+import Checkout from './pages/Checkout';
+import ProductDetail from './pages/ProductDetail';
+import LoginForm from './component/auth/LoginForm';
 import RegisterForm from './component/auth/RegisterForm';
+import Profile from './component/auth/Profile';
+import Shop from './pages/Shop';
+import ContactUs from './pages/Contact';
 
 function App() {
-  // State untuk menyimpan data produk yang diambil dari file JSON
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Fungsi untuk mengambil data produk dari file products.json
+  // Check localStorage for token on page load (or refresh)
   useEffect(() => {
-    fetch('/products.json')
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error fetching the products:', error));
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsLoggedIn(true); // User is logged in if there's a token
+    }
   }, []);
 
-  // Fungsi untuk menambahkan item ke keranjang
-  const addToCart = (item) => {
-    const existingItem = cartItems.find(cartItem => cartItem.id === item.id);
+  // Fetch Products when the component mounts
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        // Pastikan path fetch sesuai dengan lokasi file JSON Anda
+        const response = await fetch('/products.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        setError('Failed to fetch products');
+        console.error('Error fetching the products:', error);
+      }
+      setLoading(false);
+    };
 
-    if (existingItem) {
-      // Jika item sudah ada di keranjang, update quantity
+    fetchProducts();
+  }, []); // [] to run this effect only once when the component mounts
+
+  const handleLogout = () => {
+    // Remove token from localStorage and update login state
+    localStorage.removeItem('authToken');
+    setIsLoggedIn(false);
+  };
+
+  const addToCart = (item) => {
+    const itemExists = cartItems.find(cartItem => cartItem._id === item._id);
+    if (itemExists) {
       setCartItems(
         cartItems.map(cartItem =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+          cartItem._id === item._id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
         )
       );
     } else {
-      // Jika item belum ada di keranjang, tambahkan sebagai item baru
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
   };
 
-  // Fungsi untuk menghitung jumlah total item di keranjang
-  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const removeItem = (id) => {
+    setCartItems(cartItems.filter(item => item._id !== id));
+  };
+
+  const updateQuantity = (id, newQuantity) => {
+    setCartItems(
+      cartItems.map(item =>
+        item._id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  const calculateTotal = () => {
+    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const deliveryFee = subtotal > 0 ? 2 : 0;
+    const total = subtotal + deliveryFee;
+    return { subtotal, deliveryFee, total };
+  };
+
+  const totals = calculateTotal();
 
   return (
     <Router>
       <div className="App">
-        <Navbar cartCount={cartCount} />
+        <Navbar 
+          isLoggedIn={isLoggedIn} 
+          handleLogout={handleLogout} 
+          cartCount={cartItems.reduce((total, item) => total + item.quantity, 0)} 
+        />
         <Routes>
-          <Route 
-            path="/" 
-            element={
-              <>
-                <Hero />
-                <SupportBy />
-                <OurServices />
-                <PopularDelivery />
-                <Comment />
-                <ContactEmail />
-                <Footer />
-              </>
-            } 
-          />
-
-          {/* Halaman menu, kirim products dan addToCart sebagai props */}
-          <Route path="/menu" element={<Menu products={products} addToCart={addToCart} />} />
-
-          {/* Halaman services */}
+          <Route path="/" element={(
+            <>
+              <Hero />
+              <SupportBy />
+              <OurServices />
+              <PopularDelivery />
+              <Comment />
+              <ContactEmail />
+              <Footer />
+            </>
+          )} />
+          <Route path="/menu" element={loading ? <div>Loading...</div> : error ? <div>{error}</div> : <Menu products={products} addToCart={addToCart} />} />
           <Route path="/services" element={<Services />} />
-
-          {/* Halaman contact */}
           <Route path="/contact" element={<Contact />} />
-
-          {/* Halaman keranjang */}
-          <Route 
-            path="/cart" 
-            element={
-              <Cart 
-                cartItems={cartItems} 
-                removeItem={(id) => setCartItems(cartItems.filter(item => item.id !== id))} 
-                updateQuantity={(id, newQuantity) => setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity: newQuantity } : item))} 
-              />
-            } 
-          />
-
-          {/* Route untuk halaman ProductDetail */}
+          <Route path="/cart" element={<Cart cartItems={cartItems} removeItem={removeItem} updateQuantity={updateQuantity} />} />
+          <Route path="/checkout" element={<Checkout totals={totals} />} />
           <Route path="/product/:id" element={<ProductDetail products={products} addToCart={addToCart} />} />
-
-          <Route path="/login" element={<Login />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/login" element={<LoginForm setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/profile" element={isLoggedIn ? <Profile /> : <Navigate to="/login" />} />
+          <Route path="/contactus" element={<ContactUs />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

@@ -1,17 +1,10 @@
-import React, { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'; 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import '../../assets/style/customSwiperStyles.css';
-
-// Import image assets
-import pizzaImg from '../../assets/images/pizza.svg';
-import pancakeImg from '../../assets/images/pancake.svg';
-import cakeImg from '../../assets/images/cake.svg';
-import meatballImg from '../../assets/images/meatball.svg';
-import burgerImg from '../../assets/images/burger.svg';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion'; 
+import pizzaImg from '../../assets/images/nasi_liwet.jpg';
+import pancakeImg from '../../assets/images/tahu_sumedang.jpg';
+import cakeImg from '../../assets/images/sate_maranggi.jpg';
+import meatballImg from '../../assets/images/gudeg_jogja.jpg';
+import burgerImg from '../../assets/images/lumpia_semarang.jpg';
 
 // Slide data array
 const foodItems = [
@@ -23,83 +16,77 @@ const foodItems = [
 ];
 
 const PopularDelivery = () => {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  const [activeItem, setActiveItem] = useState(null);
+
+  const toggleAccordion = (id) => {
+    setActiveItem(activeItem === id ? null : id);
+  };
 
   return (
-    <section className="bg-gradient-to-b from-[#ffffff] to-[#fdf8f5] py-12 min-h-screen flex items-center">
-      <div className="container mx-auto text-center">
+    <section className="relative min-h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8">
+      {/* Slanted Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <div className="absolute w-full h-1/2 bg-orange-400 transform -translate-y-40 -skew-y-6 origin-top-left"></div>
+        <div className="absolute w-full h-1/2 top-1/2"></div>
+      </div>
+
+      <div className="container mx-auto text-center relative z-10">
         <h3 className="text-orange-500 text-sm mb-2">- Popular Delivery -</h3>
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">Trending food</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">Trending Food</h2>
 
-        {/* Centered Carousel */}
-        <div className="flex justify-center items-center">
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]} 
-            spaceBetween={30}
-            slidesPerView={3}
-            navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
-            }}
-            pagination={{ clickable: true }}
-            centeredSlides={true}
-            loop={true}
-            autoplay={{
-              delay: 3000, // Interval antara slide (3 detik)
-              disableOnInteraction: false, // Tetap autoplay meskipun pengguna berinteraksi
-            }}
-            onSwiper={(swiper) => {
-              setTimeout(() => {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
-                swiper.navigation.init();
-                swiper.navigation.update();
-              });
-            }}
-            breakpoints={{
-              0: { slidesPerView: 1 },       // Tampilkan 1 slide untuk layar kecil
-              640: { slidesPerView: 1 },     // Tampilkan 1 slide untuk layar mobile
-              768: { slidesPerView: 2 },     // Tampilkan 2 slide untuk layar tablet
-              1024: { slidesPerView: 3 },    // Tampilkan 3 slide untuk layar besar
-            }}
-            className="pb-20 max-w-6xl w-full custom-swiper"
-          >
-            {foodItems.map((item) => (
-              <SwiperSlide key={item.id} className="custom-slide p-16 md:p-2">
-                <div className="relative">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                  <div className="absolute bottom-4 left-4 text-left">
-                    <h3 className="text-white font-bold text-lg">{item.name}</h3>
-                    <p className="text-yellow-400">{item.rating} ★★★★★</p>
-                  </div>
-                  <div className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-lg text-gray-800 font-bold">
+        {/* Horizontal Accordion Layout */}
+        <div className="flex space-x-2 justify-center accordion-container max-w-6xl mx-auto overflow-x-auto flex-nowrap">
+          {foodItems.map((item) => (
+            <motion.div
+              key={item.id}
+              className={`accordion-item flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out ${
+                activeItem === item.id ? 'w-56 sm:w-72 md:w-80 lg:w-96 xl:w-104' : 'w-20 sm:w-24'
+              }`} 
+              onMouseEnter={() => toggleAccordion(item.id)}
+              onMouseLeave={() => toggleAccordion(null)}
+              initial={{ width: '5rem' }} 
+              animate={{
+                width: activeItem === item.id ? '20rem' : '5rem',
+              }}
+              transition={{
+                duration: 0.3,
+                ease: 'easeInOut',
+              }}
+              style={{
+                height: '200px',
+                overflow: 'hidden',
+                position: 'relative',
+              }}
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-full object-cover rounded-lg"
+              />
+              {activeItem === item.id && (
+                <motion.div
+                  className="absolute bottom-4 left-4 text-left bg-opacity-50 bg-black p-4 rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-white font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+                    {item.name}
+                  </h3>
+                  <p className="text-yellow-400 text-xs sm:text-sm md:text-base lg:text-sm xl:text-base">
+                    {item.rating} ★★★★★
+                  </p>
+                  <p className="text-white mt-2 text-xs sm:text-sm md:text-base lg:text-sm xl:text-base">
                     {item.price}
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-
-        {/* Custom navigation buttons */}
-        <div className="flex justify-center mt-4">
-          <button
-            ref={prevRef}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 mx-2"
-          >
-            <span className="text-lg">←</span>
-          </button>
-          <button
-            ref={nextRef}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 mx-2"
-          >
-            <span className="text-lg">→</span>
-          </button>
+                  </p>
+                  <button className="mt-4 px-4 py-2 text-xs sm:text-sm md:text-base lg:text-sm xl:text-base bg-orange-500 text-white rounded-lg shadow hover:bg-orange-600">
+                    Order Now
+                  </button>
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

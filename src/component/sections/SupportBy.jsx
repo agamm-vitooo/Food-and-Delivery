@@ -19,7 +19,7 @@ export const SupportBy = () => {
   };
 
   useEffect(() => {
-    // GSAP animation
+    // GSAP animation for appearance
     gsap.fromTo(
       logosRef.current,
       { opacity: 0, y: 50 }, // Initial state
@@ -31,6 +31,21 @@ export const SupportBy = () => {
         stagger: 0.2, // Delay between each logo animation
       }
     );
+
+    // GSAP hover effect to turn logo orange
+    logosRef.current.forEach((logo) => {
+      // Mouse hover event to turn orange
+      logo.addEventListener('mouseenter', () => {
+        gsap.to(logo, {
+          filter: 'sepia(100%) saturate(500%) hue-rotate(-20deg) brightness(110%)', // Changes to orange
+          duration: 0.5,
+        });
+      });
+
+      logo.addEventListener('mouseleave', () => {
+        gsap.to(logo, { filter: 'none', duration: 0.5 }); // Resets to original color
+      });
+    });
   }, []);
 
   return (

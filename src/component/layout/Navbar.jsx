@@ -26,15 +26,16 @@ export const Navbar = ({ cartCount }) => {
 
   return (
     <nav className={`bg-white container p-4 md:px-14 px-8 flex justify-between items-center sticky top-0 z-50 transition-all duration-300 ${hasScrolled ? 'border-b border-gray-300 shadow-md' : ''}`}>
-      {/* Container untuk Logo, Cart, dan Hamburger Icon */}
+      {/* Container for Logo, Cart, Profile, and Hamburger Icon */}
       <div className="flex items-center justify-between w-full md:w-auto">
         {/* Logo */}
         <div className="text-orange-500 font-bold text-xl">
           F&D
         </div>
 
-        {/* Cart Icon untuk tampilan mobile */}
+        {/* Cart & Profile Icons for Mobile */}
         <div className="relative flex items-center md:hidden ml-auto">
+          {/* Cart Icon */}
           <NavLink to="/cart" className="relative text-gray-600 hover:text-orange-500">
             <img
               src="https://img.icons8.com/fluency-systems-regular/96/shopping-cart--v1.png"
@@ -46,6 +47,15 @@ export const Navbar = ({ cartCount }) => {
                 {cartCount}
               </span>
             )}
+          </NavLink>
+          
+          {/* Profile Icon */}
+          <NavLink to="/profile" className="ml-4 text-gray-600 hover:text-orange-500">
+            <img
+              src="https://img.icons8.com/fluency-systems-regular/96/user.png"
+              alt="profile"
+              className="h-6 w-6"
+            />
           </NavLink>
         </div>
 
@@ -66,50 +76,27 @@ export const Navbar = ({ cartCount }) => {
         } md:flex md:space-x-8 text-gray-700 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-4 md:p-0 space-y-4 md:space-y-0 overflow-hidden transition-all duration-500 ease-in-out md:max-h-full md:opacity-100`}
         style={{ transitionProperty: 'max-height, opacity' }}
       >
-        {/* Menu with hover effects */}
         <li className="group relative hover:text-orange-500">
-          <NavLink
-            exact
-            to="/"
-            className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full"
-            activeClassName="text-orange-500"
-            onClick={() => setIsOpen(false)}
-          >
+          <NavLink exact to="/" className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full" activeClassName="text-orange-500" onClick={() => setIsOpen(false)}>
             Home
           </NavLink>
         </li>
         <li className="group relative hover:text-orange-500">
-          <NavLink
-            to="/menu"
-            className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full"
-            activeClassName="text-orange-500"
-            onClick={() => setIsOpen(false)}
-          >
+          <NavLink to="/menu" className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full" activeClassName="text-orange-500" onClick={() => setIsOpen(false)}>
             Menu
           </NavLink>
         </li>
         <li className="group relative hover:text-orange-500">
-          <NavLink
-            to="/services"
-            className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full"
-            activeClassName="text-orange-500"
-            onClick={() => setIsOpen(false)}
-          >
+          <NavLink to="/services" className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full" activeClassName="text-orange-500" onClick={() => setIsOpen(false)}>
             Services
           </NavLink>
         </li>
         <li className="group relative hover:text-orange-500">
-          <NavLink
-            to="/contact"
-            className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full"
-            activeClassName="text-orange-500"
-            onClick={() => setIsOpen(false)}
-          >
+          <NavLink to="/contact" className="relative hover:underline after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-0.5 after:bg-orange-500 after:transition-all after:duration-300 group-hover:after:w-full" activeClassName="text-orange-500" onClick={() => setIsOpen(false)}>
             Contact
           </NavLink>
         </li>
-
-        {/* Mobile Login & Register Buttons */}
+        {/* Mobile Login & Register */}
         <li className="md:hidden flex flex-col space-y-2">
           <NavLink to="/register" className="border border-orange-500 text-orange-500 px-4 py-2 rounded-full hover:bg-orange-500 hover:text-white transition duration-300">
             Register
@@ -120,8 +107,9 @@ export const Navbar = ({ cartCount }) => {
         </li>
       </ul>
 
-      {/* Cart Icon untuk tampilan desktop */}
+      {/* Cart & Profile Icons for Desktop */}
       <div className="hidden md:flex items-center space-x-4">
+        {/* Cart Icon */}
         <div className="relative">
           <NavLink to="/cart" className="relative text-gray-600 hover:text-orange-500">
             <img
@@ -137,16 +125,27 @@ export const Navbar = ({ cartCount }) => {
           </NavLink>
         </div>
 
-        {/* Register Button */}
-        <NavLink to="/register" className="border border-orange-500 text-orange-500 px-4 py-2 rounded-full hover:bg-orange-500 hover:text-white transition duration-300">
-          Register
+        {/* Profile Icon */}
+        <NavLink to="/profile" className="text-gray-600 hover:text-orange-500">
+          <img
+            src="https://img.icons8.com/fluency-systems-regular/96/user.png"
+            alt="profile"
+            className="h-6 w-6"
+          />
         </NavLink>
 
-        {/* Login Button */}
-        <NavLink to="/login" className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition duration-300">
+        {/* Register Button */}
+        <NavLink to="/login" className="border border-orange-500 text-orange-500 px-4 py-2 rounded-full hover:bg-orange-500 hover:text-white transition duration-300">
           Login
         </NavLink>
+
+        {/* Login Button
+        <NavLink to="/login" className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition duration-300">
+          Login
+        </NavLink> */}
       </div>
     </nav>
   );
 };
+
+export default Navbar;

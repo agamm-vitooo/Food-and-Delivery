@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom'; // Tambahkan ini
+import { useNavigate } from 'react-router-dom';
 import womanImage from '../../assets/images/woman.svg';
 import avatar1 from '../../assets/images/avatar1.svg';
 import avatar2 from '../../assets/images/avatar2.svg';
 import avatar3 from '../../assets/images/avatar3.svg';
 
 const Hero = () => {
-  const navigate = useNavigate(); // Inisialisasi useNavigate
+  const navigate = useNavigate();
+  const [scrollY, setScrollY] = useState(0);
+
+  // Update scroll position
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    // Add event listener on scroll
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      // Clean up the event listener
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <section className="bg-white py-12">
@@ -32,7 +48,7 @@ const Hero = () => {
               className="bg-orange-500 text-white px-6 py-3 rounded-full hover:bg-orange-600"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/menu')} // Route ke halaman Menu
+              onClick={() => navigate('/menu')}
             >
               Pesan Sekarang
             </motion.button>
@@ -40,7 +56,7 @@ const Hero = () => {
               className="border border-orange-500 text-orange-500 px-6 py-3 rounded-full hover:bg-orange-100"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/services')} // Route ke halaman Our Services
+              onClick={() => navigate('/services')}
             >
               Jelajahi
             </motion.button>
@@ -64,6 +80,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }} // Awal animasi
           animate={{ opacity: 1, y: 0 }} // Animasi masuk
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }} // Durasi dan delay animasi
+          style={{ transform: `translateY(${scrollY * 0.2}px)` }} // Parallax effect on scroll
         >
           <div className="relative z-10">
             <img src={womanImage} alt="Wanita Berpikir" className="w-full max-w-[500px] mx-auto" />
@@ -75,6 +92,7 @@ const Hero = () => {
             initial={{ scale: 0 }} // Awal animasi
             animate={{ scale: 1 }} // Animasi masuk
             transition={{ duration: 0.6, delay: 0.5 }} // Durasi dan delay animasi
+            style={{ transform: `translateY(${scrollY * 0.3}px)` }} // Parallax effect on scroll
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c1.045 0 1.918.405 2.646 1.07L17 7m1-1h-6m0 0h-2a2 2 0 00-2 2v2a2 2 0 002 2h3.2m0 0a6.8 6.8 0 010 6m0-6H13" />
